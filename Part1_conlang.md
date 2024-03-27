@@ -89,3 +89,7 @@ Writing systems aren't static entities. They evolve over time, influenced by:
 
 
 Writing systems offer a window into the history, culture, and structure of languages. From ancient cuneiform to modern internet slang, they are a testament to human ingenuity and the ever-evolving nature of communication. So, the next time you pick up a pen or tap away on your keyboard, remember the fascinating journey writing systems have taken to bring language to life!
+
+
+
+WE HAVE DESIGNED SOME (60) CHARACTERS AS ALPHABETS (attached as alpha1.jpeg) AS FIRST PROTOTYPE BEFORE ARRIVING AT THE FINAL SET OF ALPHABETS, AND PREPARED A TRAINING DATA SET FOR OCR HAVING 120 HANDWRITTEN VARIATIONS OF EACH CHARACTERS.
