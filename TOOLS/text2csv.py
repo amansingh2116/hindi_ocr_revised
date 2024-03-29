@@ -17,6 +17,6 @@ def create_csv_from_text(text_file, csv_file):
             writer.writerow([line])  # Write to CSV
 
 # Example usage
-text_file_path = "C:\\Users\\amans\OneDrive\\Documents\\GitHub\\stat_sem2_project\\paths.txt"  # Path to the input text file
-csv_file_path = "C:\\Users\\amans\\OneDrive\\Documents\\GitHub\\stat_sem2_project\\path.csv"  # Path to the output CSV file
+text_file_path = "TOOLS\\paths.txt"  # Path to the input text file
+csv_file_path = "TOOLS\\path.csv"  # Path to the output CSV file
 create_csv_from_text(text_file_path, csv_file_path)
