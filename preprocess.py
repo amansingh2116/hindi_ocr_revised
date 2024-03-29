@@ -89,9 +89,17 @@ def thresholding(image):
 
 # function to binarize image
 def binarize(file):
-    grey_img = cv2.cvtColor(file, cv2.COLOR_BGR2GRAY)  # convert to grayscale
-    threshold, bin_img = cv2.threshold(grey_img, 150, 140, cv2.THRESH_BINARY)  # apply binary threshold
+    # Convert image to grayscale if it has multiple channels
+    if len(file.shape) > 2:
+        grey_img = cv2.cvtColor(file, cv2.COLOR_BGR2GRAY)  # convert to grayscale
+    else:
+        grey_img = file  # Image is already grayscale
+    
+    # Apply binary threshold
+    threshold, bin_img = cv2.threshold(grey_img, 150, 140, cv2.THRESH_BINARY)
+    
     return bin_img
+
 
 
 # function to remove noise
@@ -189,16 +197,16 @@ def add_border(file):
 
 
 # reading image
-file_name = "C:\\Users\\amans\\OneDrive\Desktop\\stat_sem2_project\\images\\saurabh1.jpg"
+file_name = "./images/saurabh1.jpg"
 img = cv2.imread(file_name)
 
 # displaying image
 
 resiz_img = resize_image(img, 1)
-brightness = 10  # Adjust as desired
-contrast = 3  # Adjust as desired
-#adjusted_imge = adjust_brightness_contrast(img, brightness=brightness, contrast=contrast)
-sharp_img = sharpen_image(img)
+brightness = 2  # Adjust as desired
+contrast = 1  # Adjust as desired
+adjusted_img = adjust_brightness_contrast(img, brightness=brightness, contrast=contrast)
+sharp_img = sharpen_image(adjusted_img)
 #inverted_img = invert(img)
 thres_img= thresholding(sharp_img)
 binary_img = binarize(thres_img)

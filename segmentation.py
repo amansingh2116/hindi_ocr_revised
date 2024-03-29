@@ -5,10 +5,15 @@ def character_segmentation(image_path):
     # Load the image
     image = cv2.imread(image_path)
     
-    # Resize the image to fit the screen without cropping
+    # Calculate the resizing ratio based on both width and height
     max_display_width = 1000  # Maximum width for display
-    ratio = max_display_width / image.shape[1]
-    resized_image = cv2.resize(image, (max_display_width, int(image.shape[0] * ratio)))
+    max_display_height = 800  # Maximum height for display
+    width_ratio = max_display_width / image.shape[1]
+    height_ratio = max_display_height / image.shape[0]
+    resizing_ratio = min(width_ratio, height_ratio)
+    
+    # Resize the image to fit the screen without cropping
+    resized_image = cv2.resize(image, None, fx=resizing_ratio, fy=resizing_ratio, interpolation=cv2.INTER_AREA)
     
     # Convert the image to grayscale
     gray_img = cv2.cvtColor(resized_image, cv2.COLOR_BGR2GRAY)
@@ -49,9 +54,5 @@ def character_segmentation(image_path):
     cv2.destroyAllWindows()
 
 # Example usage
-image_path = "C:\\Users\\amans\\OneDrive\\Desktop\\stat_sem2_project\\output2.jpeg"
+image_path = "C:\\Users\\amans\\OneDrive\\Documents\\GitHub\\stat_sem2_project\\images\\saurabh2bet.jpg"
 character_segmentation(image_path)
-
-
-
-
