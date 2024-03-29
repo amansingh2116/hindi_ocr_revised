@@ -1,4 +1,0 @@
-"C:\\Users\\amans\\OneDrive\\Documents\\GitHub\\stat_sem2_project\\images\\inverted_image.jpeg"
-"C:\\Users\\amans\\OneDrive\\Documents\\GitHub\\stat_sem2_project\\images\\saurabh2.bet.jpg"
-"C:\\Users\\amans\\OneDrive\\Documents\\GitHub\\stat_sem2_project\\images\\saurabh1bet.jpg"
-"C:\\Users\\amans\\OneDrive\\Documents\\GitHub\\stat_sem2_project\\images\\output2.jpeg"
