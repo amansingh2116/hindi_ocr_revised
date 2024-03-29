@@ -65,9 +65,9 @@ Preprocessing: Before performing OCR, preprocess the scanned images to enhance t
 
 Segmentation: Divide the scanned image into individual symbols. This step is crucial for processing each symbol separately.
 
-Feature Extraction: Extract relevant features from each segmented symbol. Features could include stroke direction, curvature, and spatial relationships between different parts of the symbol.
-
 Training Data Preparation: Create a dataset containing examples of handwritten symbols along with their corresponding labels (i.e., the alphabet symbols). Ensure diversity in writing styles and variations.
+
+Feature Extraction: Extract relevant features from each segmented symbol. Features could include stroke direction, curvature, and spatial relationships between different parts of the symbol.
 
 Training: Train a machine learning model, such as a neural network, using the prepared dataset. Convolutional Neural Networks (CNNs) are commonly used for OCR tasks due to their effectiveness in learning spatial hierarchies of features.
 
