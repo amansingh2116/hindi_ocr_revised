@@ -5,7 +5,7 @@ import cv2
 import numpy as np
 import math
 from PIL import Image
-#from matplotlib import pyplot as plt
+from matplotlib import pyplot as plt
 
 
 
@@ -133,7 +133,7 @@ def thin_font(file):
 def thick_font(file):
     img = invert(file)
     kernel = np.ones((2,2), np.uint8)
-    img = cv2.dilate(img, kernel, iterations=1)
+    img = cv2.dilate(img, kernel, iterations=2)
     img = invert(img)
     return (img)
 
@@ -195,25 +195,31 @@ def add_border(file):
 
 
 
+def preprocess_image(file):
+    # reading image
+    img = cv2.imread(file)
 
-# reading image
-file_name = "./images/saurabh1.jpg"
-img = cv2.imread(file_name)
+    # resiz_img = resize_image(img, 1)
+    brightness = 1.5  # Adjust as desired
+    contrast = 1.2  # Adjust as desired
+    adjusted_img = adjust_brightness_contrast(img, brightness=brightness, contrast=contrast)
+    sharp_img = sharpen_image(adjusted_img)
+    # inverted_img = invert(img)
+    thres_img= thresholding(sharp_img)
+    # binary_img = binarize(thres_img)
+    noise_rem = noise_remove(thres_img)
+    # erode_img = thin_font(noise_rem)
+    dilate_img = thick_font(noise_rem)
+    # deskew_img = deskew(dilate_img)
+    no_border = remove_borders(dilate_img)
+    yes_border = add_border(no_border)
 
-# displaying image
+    return yes_border
 
-resiz_img = resize_image(img, 1)
-brightness = 2  # Adjust as desired
-contrast = 1  # Adjust as desired
-adjusted_img = adjust_brightness_contrast(img, brightness=brightness, contrast=contrast)
-sharp_img = sharpen_image(adjusted_img)
-#inverted_img = invert(img)
-thres_img= thresholding(sharp_img)
-binary_img = binarize(thres_img)
-noise_rem = noise_remove(binary_img)
-# erode_img = thin_font(noise_rem)
-dilate_img = thick_font(noise_rem)
-deskew_img = deskew(dilate_img)
-no_border = remove_borders(deskew_img)
-yes_border = add_border(no_border)
-display(yes_border)
+# Plot the image
+file_name = r"C:\Users\amans\OneDrive\Documents\GitHub\stat_sem2_project\images_proj\IMG_20240401_034026.jpg"
+output= preprocess_image(file_name)
+image_rgb = cv2.cvtColor(output, cv2.COLOR_BGR2RGB) # Convert the image from BGR to RGB
+plt.imshow(image_rgb)
+plt.axis('off')  # Turn off axis
+plt.show()

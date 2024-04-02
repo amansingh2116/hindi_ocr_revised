@@ -1,4 +1,5 @@
-"C:\\Users\\amans\\OneDrive\\Documents\\GitHub\\stat_sem2_project\\images\\inverted_image.jpeg"
-"C:\\Users\\amans\\OneDrive\\Documents\\GitHub\\stat_sem2_project\\images\\saurabh2bet.jpg"
-"C:\\Users\\amans\\OneDrive\\Documents\\GitHub\\stat_sem2_project\\images\\saurabh1bet.jpg"
-"C:\\Users\\amans\\OneDrive\\Documents\\GitHub\\stat_sem2_project\\images\\output2.jpeg"
+C:\Users\amans\OneDrive\Documents\GitHub\stat_sem2_project\images_proj\IMG_20240401_034026.jpg
+C:\Users\amans\OneDrive\Documents\GitHub\stat_sem2_project\images_proj\IMG_20240401_034350.jpg
+C:\Users\amans\OneDrive\Documents\GitHub\stat_sem2_project\images_proj\IMG_20240401_035312.jpg
+C:\Users\amans\OneDrive\Documents\GitHub\stat_sem2_project\images_proj\IMG_20240401_035444.jpg
+C:\Users\amans\OneDrive\Documents\GitHub\stat_sem2_project\images_proj\IMG_20240401_040141.jpg
