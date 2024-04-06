@@ -1,7 +1,5 @@
 import os
 import cv2
-import pandas as pd
-import numpy as np
 from sklearn.svm import SVC
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, confusion_matrix
@@ -43,7 +41,7 @@ def train_model(X_train, y_train):
 train_dir = r"C:\Users\amans\OneDrive\Documents\GitHub\stat_sem2_project\sample_image"
 
 # List of folder names, each containing images of a handwritten character
-folders = ['right 4', 'ta', 'ulta a', 'up tri', 'v']
+folders = ['1', '2', '3', '4', '5', '6' , '7', '8' , '9', '10', '11', '12' , '13', '14']
 
 # Load dataset
 X, y = load_dataset(train_dir)
@@ -70,7 +68,7 @@ print("Confusion Matrix:\n", conf_matrix)
 print('Classification report: ',class_report) 
 
 # Now classify a single input image
-image_path = r"C:\Users\amans\OneDrive\Documents\GitHub\stat_sem2_project\sample_image\right 4\p_8.png"
+image_path = r"C:\Users\amans\OneDrive\Documents\GitHub\stat_sem2_project\sample_image\1\im__122.png"
 img = cv2.imread(image_path)
 hog_features = extract_hog_features(img)
 predicted_label = svm_model.predict([hog_features])
