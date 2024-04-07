@@ -1,58 +1,84 @@
-from flask import Flask, render_template, request, redirect, url_for
-from werkzeug.utils import secure_filename
-import os
 import cv2
+import numpy as np
 import joblib
+from preprocessing import preprocess_image
+from skimage.feature import hog
 
-app = Flask(__name__)
+# Load the trained classifier from the joblib file
+model_path = r'C:\Users\amans\OneDrive\Documents\GitHub\stat_sem2_project\ledom.joblib'
+loaded_model = joblib.load(model_path)
 
-# Configure upload folder and allowed extensions
-UPLOAD_FOLDER = 'uploads'
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+# Function to extract HOG features from an image
+def extract_hog_features(image):
+    # Preprocess the image
+    img_res = cv2.resize(image, (64, 128), interpolation=cv2.INTER_AREA)
+    hog_img = hog(img_res, orientations=9, pixels_per_cell=(8, 8), cells_per_block=(1, 1))
+    return hog_img
 
-# Load the trained classifier
-MODEL_PATH = r'final project/model.joblib'
-loaded_model = joblib.load(MODEL_PATH)
-
-# Function to predict labels using OCR
-def predict_labels(image_path):
-    img = cv2.imread(image_path)
-    # Add your preprocessing and segmentation code here
+def predict_character(image):
+    # Extract HOG features from the image
+    hog_features = extract_hog_features(image)
     
-    # Extract features
-    hog_features = extract_hog_features(img)
-    # Predict label
+    # Predict the label for the image using the loaded classifier
     predicted_label = loaded_model.predict([hog_features])
-    return predicted_label[0]
+    
+    return str(predicted_label[0])
 
-# Route to upload image
-@app.route('/', methods=['GET', 'POST'])
-def upload_image():
-    if request.method == 'POST':
-        # Check if the post request has the file part
-        if 'file' not in request.files:
-            return redirect(request.url)
-        file = request.files['file']
-        # If user does not select file, browser also
-        # submit an empty part without filename
-        if file.filename == '':
-            return redirect(request.url)
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            file.save(file_path)
-            # Predict labels and generate new image
-            predicted_label = predict_labels(file_path)
-            # Add code to generate new image with predicted labels
-            # Redirect to display the new image
-            return redirect(url_for('display_image', filename=filename))
-    return render_template('upload.html')
+def character_segmentation(image_path):
+    # Load the image
+    image = cv2.imread(image_path)
+    # Preprocess the image
+    preprocessed_image = preprocess_image(image)
+    # Calculate the resizing ratio based on both width and height
+    max_display_width = 1000  # Maximum width for display
+    max_display_height = 800  # Maximum height for display
+    width_ratio = max_display_width / image.shape[1]
+    height_ratio = max_display_height / image.shape[0]
+    resizing_ratio = min(width_ratio, height_ratio)
+    
+    # Resize the image to fit the screen without cropping
+    resized_image = cv2.resize(preprocessed_image, None, fx=resizing_ratio, fy=resizing_ratio, interpolation=cv2.INTER_AREA)
+    
+    
+    # Apply thresholding
+    _, thresh_img = cv2.threshold(resized_image, 120, 255, cv2.THRESH_BINARY_INV)
+    
+    # Dilation to increase border width
+    kernel = np.ones((5, 5), np.uint8)
+    dilated_img = cv2.dilate(thresh_img, kernel, iterations=1)
+    
+    # Find contours
+    contours, _ = cv2.findContours(dilated_img.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    
+    # Draw bounding boxes with adjusted border width and predict characters
+    for cnt in contours:
+        x, y, w, h = cv2.boundingRect(cnt)
+        
+        # Expand the bounding box
+        border_width = 10  # Adjust border width as needed
+        x -= border_width
+        y -= border_width
+        w += 2 * border_width
+        h += 2 * border_width
+        
+        # Ensure the coordinates are within the image boundaries
+        x = max(x, 0)
+        y = max(y, 0)
+        w = min(w, resized_image.shape[1] - x)
+        h = min(h, resized_image.shape[0] - y)
+        
+        # Draw the expanded bounding box
+        cv2.rectangle(resized_image, (x, y), (x + w, y + h), (155, 0, 255), 2)
+        
+        # Predict character and draw text below the bounding box
+        predicted_char = predict_character(resized_image[y:y+h, x:x+w])
+        cv2.putText(resized_image, predicted_char, (x, y + h + 20), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2)
+    
+    # Display the result
+    cv2.imshow('Character Segmentation', resized_image)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
-# Route to display the new image with predicted labels
-@app.route('/display/<filename>')
-def display_image(filename):
-    return render_template('display.html', filename=filename)
-
-if __name__ == '__main__':
-    app.run(debug=True)
+# Example usage
+image_path = r"C:\Users\amans\OneDrive\Documents\GitHub\stat_sem2_project\images\alpha1.jpeg"
+character_segmentation(image_path)

@@ -79,7 +79,8 @@ print('Classification report: ',class_report)
 # Now classify a single input image
 image_path = r"C:\Users\amans\OneDrive\Documents\GitHub\stat_sem2_project\sample images\1\im__122.png"
 img = cv2.imread(image_path)
-hog_features = extract_hog_features(img)
+resized_img = cv2.resize(img, (30, 30))
+hog_features = extract_hog_features(resized_img)
 predicted_label = svm_model.predict([hog_features])
 print("Predicted label:", predicted_label[0])
 

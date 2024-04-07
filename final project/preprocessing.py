@@ -195,9 +195,7 @@ def add_border(file):
 
 
 
-def preprocess_image(file):
-    # reading image
-    img = cv2.imread(file)
+def preprocess_image(img):
 
     # resiz_img = resize_image(img, 1)
     brightness = 1.5  # Adjust as desired
@@ -217,9 +215,10 @@ def preprocess_image(file):
     return yes_border
 
 # Plot the image
-file_name = r"C:\Users\amans\OneDrive\Documents\GitHub\stat_sem2_project\images_proj\IMG_20240401_034026.jpg"
-output= preprocess_image(file_name)
-image_rgb = cv2.cvtColor(output, cv2.COLOR_BGR2RGB) # Convert the image from BGR to RGB
-plt.imshow(image_rgb)
-plt.axis('off')  # Turn off axis
-plt.show()
+# file_name = r"C:\Users\amans\OneDrive\Documents\GitHub\stat_sem2_project\images_proj\IMG_20240401_034026.jpg"
+# original_image = cv2.imread(file_name)
+# output= preprocess_image(original_image)
+# image_rgb = cv2.cvtColor(output, cv2.COLOR_BGR2RGB) # Convert the image from BGR to RGB
+# plt.imshow(image_rgb)
+# plt.axis('off')  # Turn off axis
+# plt.show()

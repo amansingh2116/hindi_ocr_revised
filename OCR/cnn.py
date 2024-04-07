@@ -10,7 +10,7 @@ from tensorflow.keras import layers, models
 
 # Function to resize and preprocess the image
 def preprocess_image(image):
-    resized_image = cv2.resize(image, (64, 64))
+    resized_image = cv2.resize(image, (30, 30))
     # Normalizing pixel values to range [0, 1]
     normalized_image = resized_image / 255.0
     return normalized_image
