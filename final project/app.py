@@ -5,7 +5,7 @@ from preprocessing import preprocess_image
 from skimage.feature import hog
 
 # Load the trained classifier from the joblib file
-model_path = r'C:\Users\amans\OneDrive\Documents\GitHub\stat_sem2_project\ledom.joblib'
+model_path = r'C:\Users\amans\OneDrive\Documents\GitHub\stat_sem2_project\final project\model.joblib'
 loaded_model = joblib.load(model_path)
 
 # Function to extract HOG features from an image

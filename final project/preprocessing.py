@@ -124,7 +124,7 @@ def noise_remove(file):
 # function to erode image
 def thin_font(file):
     img = invert(file)
-    kernel = np.ones((2,2), np.uint8)
+    kernel = np.ones((3,3), np.uint8)
     img = cv2.erode(img, kernel, iterations=1)
     img = invert(img)
     return (img)
@@ -206,10 +206,10 @@ def preprocess_image(img):
     thres_img= thresholding(sharp_img)
     # binary_img = binarize(thres_img)
     noise_rem = noise_remove(thres_img)
-    # erode_img = thin_font(noise_rem)
-    dilate_img = thick_font(noise_rem)
+    erode_img = thin_font(noise_rem)
+    # dilate_img = thick_font(noise_rem)
     # deskew_img = deskew(dilate_img)
-    no_border = remove_borders(dilate_img)
+    no_border = remove_borders(erode_img)
     yes_border = add_border(no_border)
 
     return yes_border

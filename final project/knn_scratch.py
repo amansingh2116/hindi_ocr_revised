@@ -61,36 +61,34 @@ sm = SMOTE(random_state=0)
 X_train_resampled, y_train_resampled = sm.fit_resample(X_train, y_train)
 
 # Train KNN model
-knn_model = knn(X_train_resampled, y_train_resampled, X_test)
+# knn_model = knn(X_train_resampled, y_train_resampled, X_test)
 
-# Evaluate the classifier
-print('Accuracy {:.2f}'.format(np.mean(knn_model == y_test)))
-conf_matrix = confusion_matrix(y_test, knn_model)
-np.set_printoptions(threshold=np.inf)
-print("Confusion Matrix:")
-print(conf_matrix)
-class_report = classification_report(y_test, knn_model)
-print("Classification Report:\n", class_report)
+# # Evaluate the classifier
+# print('Accuracy {:.2f}'.format(np.mean(knn_model == y_test)))
+# conf_matrix = confusion_matrix(y_test, knn_model)
+# np.set_printoptions(threshold=np.inf)
+# print("Confusion Matrix:")
+# print(conf_matrix)
+# class_report = classification_report(y_test, knn_model)
+# print("Classification Report:\n", class_report)
 
+# # Save the trained classifier to a file
+# save_path = r'C:\Users\amans\OneDrive\Documents\GitHub\stat_sem2_project\ledom.joblib'
+# joblib.dump(knn_model, save_path)
+# print("Classifier saved to:", save_path)
 
-
-
-
-# Load the trained classifier from the file
-save_path = r'C:\Users\amans\OneDrive\Documents\GitHub\stat_sem2_project\ledom.joblib'
-
-try:
-    loaded_clf = joblib.load(save_path)
-    print("Classifier loaded successfully.")
-except Exception as e:
-    print("Error loading classifier:", e)
-# Save the trained classifier to a file
-joblib.dump(knn_model, save_path)
-print("Classifier saved to:", save_path)
+# # Load the trained classifier from the file
+# try:
+#     loaded_clf = joblib.load(save_path)
+#     print("Classifier loaded successfully.")
+# except Exception as e:
+#     print("Error loading classifier:", e)
 
 # Now classify a single input image
-image_path = r"C:\Users\amans\OneDrive\Documents\GitHub\stat_sem2_project\sample_image\7\im__21.png"
+image_path = r"C:\Users\amans\OneDrive\Documents\GitHub\stat_sem2_project\sample images\7\im__21.png"
 img = cv2.imread(image_path)
 hog_features = extract_hog_features(img)
-predicted_label = loaded_clf.predict([hog_features])
-print("Predicted label:", predicted_label[0])
+
+# Predict using the loaded classifier (knn_model is a list)
+predicted_label = knn(X_train_resampled, y_train_resampled, [hog_features])[0]
+print("Predicted label:", label_encoder.inverse_transform([predicted_label])[0])
