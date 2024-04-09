@@ -84,11 +84,18 @@ X_train_resampled, y_train_resampled = sm.fit_resample(X_train, y_train)
 # except Exception as e:
 #     print("Error loading classifier:", e)
 
+
+def predict(img):
+    hog_features = extract_hog_features(img)
+    # Predict using the loaded classifier (knn_model is a list)
+    predicted_label = knn(X_train_resampled, y_train_resampled, [hog_features])[0]
+    return label_encoder.inverse_transform([predicted_label])[0]
+
+
+
 # Now classify a single input image
 image_path = r"C:\Users\amans\OneDrive\Documents\GitHub\stat_sem2_project\sample images\7\im__21.png"
 img = cv2.imread(image_path)
-hog_features = extract_hog_features(img)
-
-# Predict using the loaded classifier (knn_model is a list)
-predicted_label = knn(X_train_resampled, y_train_resampled, [hog_features])[0]
-print("Predicted label:", label_encoder.inverse_transform([predicted_label])[0])
+z = predict(img)
+print(z)
+print(type(z))

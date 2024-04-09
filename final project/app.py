@@ -54,18 +54,18 @@ def character_segmentation(image_path):
     for cnt in contours:
         x, y, w, h = cv2.boundingRect(cnt)
         
-        # Expand the bounding box
-        border_width = 10  # Adjust border width as needed
-        x -= border_width
-        y -= border_width
-        w += 2 * border_width
-        h += 2 * border_width
+        # # Expand the bounding box
+        # border_width = 10  # Adjust border width as needed
+        # x -= border_width
+        # y -= border_width
+        # w += 2 * border_width
+        # h += 2 * border_width
         
-        # Ensure the coordinates are within the image boundaries
-        x = max(x, 0)
-        y = max(y, 0)
-        w = min(w, resized_image.shape[1] - x)
-        h = min(h, resized_image.shape[0] - y)
+        # # Ensure the coordinates are within the image boundaries
+        # x = max(x, 0)
+        # y = max(y, 0)
+        # w = min(w, resized_image.shape[1] - x)
+        # h = min(h, resized_image.shape[0] - y)
         
         # Draw the expanded bounding box
         cv2.rectangle(resized_image, (x, y), (x + w, y + h), (155, 0, 255), 2)

@@ -10,7 +10,7 @@ model_path = r'C:\Users\amans\OneDrive\Documents\GitHub\stat_sem2_project\final 
 loaded_model = joblib.load(model_path)
 
 # Load default character images
-default_characters_path = r"C:\Users\amans\OneDrive\Documents\GitHub\stat_sem2_project\images\alpha1\renamed_images\renamed_images"
+default_characters_path = r"C:\Users\amans\OneDrive\Documents\GitHub\stat_sem2_project\images\alpha1"
 
 default_characters = {}
 for filename in os.listdir(default_characters_path):
