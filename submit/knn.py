@@ -86,6 +86,7 @@ save_path = r'C:\Users\amans\OneDrive\Documents\GitHub\stat_sem2_project\submit\
 joblib.dump((knn_model, label_encoder), save_path)
 print("Classifier saved to:", save_path)
 
+# To classify a sinle input image
 # Load the trained classifier from the file
 # try:
 #     loaded_clf, loaded_label_encoder = joblib.load(save_path)
