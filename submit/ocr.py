@@ -5,6 +5,20 @@ from pre import preprocess_image
 from skimage.feature import hog
 import os
 
+def display(img, dpi=80):
+  if img is None:
+    print("Error: Could not read image from", img)
+    return
+  height, width = img.shape[:2] # Get image dimensions
+  # Calculate aspect ratio preserving figure size in inches
+  fig_width = width / float(dpi)
+  fig_height = height / float(dpi)
+  # Create a new window with calculated size
+  cv2.namedWindow("Image", cv2.WINDOW_NORMAL)  # Create resizable window
+  cv2.resizeWindow("Image", int(fig_width * 100), int(fig_height * 100))  # Resize in pixels
+  cv2.imshow("Image", img) # Display the image on the created window
+  cv2.waitKey(0) # Wait for a key press to close the window
+  cv2.destroyAllWindows() # Close all windows
 
 
 class CustomKNNClassifier:
@@ -40,7 +54,9 @@ except Exception as e:
     print("Error loading classifier:", e)
 
 # Load default character images
-default_characters_path = r"C:\Users\amans\OneDrive\Documents\GitHub\stat_sem2_project\images\alpha1"
+default_characters_path = r"C:\Users\amans\OneDrive\Documents\GitHub\stat_sem2_project\submit\final chars"
+
+
 
 default_characters = {}
 for filename in os.listdir(default_characters_path):
@@ -175,6 +191,8 @@ def ocr2(image_path):
         
         # Predict character and draw text below the bounding box
         predicted_char = predict_character(resized_image[y:y+h, x:x+w])
+        print(type(dict[int(predicted_char)]))
+
         cv2.putText(resized_image, predicted_char, (x, y + h + 20), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 2)
     
     # Display the result
@@ -184,6 +202,6 @@ def ocr2(image_path):
 
 
 # Example usage
-image_path = r"C:\Users\amans\OneDrive\Documents\GitHub\stat_sem2_project\images\alpha1.jpeg"
+image_path = r"image.jpeg"
 ocr(image_path)
 ocr2(image_path)

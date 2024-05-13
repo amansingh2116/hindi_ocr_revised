@@ -124,7 +124,7 @@ def noise_remove(file):
 # function to erode image
 def thin_font(file):
     img = invert(file)
-    kernel = np.ones((3,3), np.uint8)
+    kernel = np.ones((1,1), np.uint8)
     img = cv2.erode(img, kernel, iterations=1)
     img = invert(img)
     return (img)
@@ -132,8 +132,8 @@ def thin_font(file):
 # function to dilate image
 def thick_font(file):
     img = invert(file)
-    kernel = np.ones((2,2), np.uint8)
-    img = cv2.dilate(img, kernel, iterations=2)
+    kernel = np.ones((3,3), np.uint8)
+    img = cv2.dilate(img, kernel, iterations=3)
     img = invert(img)
     return (img)
 

@@ -1,18 +1,11 @@
+# program to preprocess and segment images for training data set geneartion
+
 import cv2
 import numpy as np
 import os
 import csv
 import math
 from PIL import Image
-import shutil
-
-
-
-
-
-
-
-
 
 
 # function to sharpen the input image.

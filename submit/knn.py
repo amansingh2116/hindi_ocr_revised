@@ -1,3 +1,5 @@
+# program to ceate a model using KNN using training dataset
+
 import os
 import cv2
 import numpy as np
@@ -8,6 +10,7 @@ from skimage.feature import hog
 from sklearn.preprocessing import LabelEncoder
 import joblib
 
+# predict the label for the image using the loaded knn classifier
 class CustomKNNClassifier:
     def __init__(self, k=5):
         self.k = k
@@ -28,6 +31,8 @@ class CustomKNNClassifier:
             y_pred.append(predicted_label)
         return y_pred
 
+
+# extract hog features from the image
 def extract_hog_features(image):
     # Preprocess the image
     img_res = cv2.resize(image, (64, 128), interpolation=cv2.INTER_AREA)
@@ -35,6 +40,7 @@ def extract_hog_features(image):
     hog_img = hog(img_gray, orientations=9, pixels_per_cell=(8, 8), cells_per_block=(1, 1))
     return hog_img
 
+# load the dataset and creating feature vector for each image along with its label
 def load_dataset(train_dir):
     features = []
     labels = []

@@ -1,3 +1,5 @@
+# program to discard bad/wrong images from segmented images for training data generation
+
 import os
 import cv2
 
