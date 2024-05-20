@@ -132,8 +132,8 @@ def thin_font(file):
 # function to dilate image
 def thick_font(file):
     img = invert(file)
-    kernel = np.ones((3,3), np.uint8)
-    img = cv2.dilate(img, kernel, iterations=3)
+    kernel = np.ones((2,2), np.uint8)
+    img = cv2.dilate(img, kernel, iterations=2)
     img = invert(img)
     return (img)
 
@@ -206,10 +206,10 @@ def preprocess_image(img):
     thres_img= thresholding(sharp_img)
     # binary_img = binarize(thres_img)
     noise_rem = noise_remove(thres_img)
-    erode_img = thin_font(noise_rem)
-    # dilate_img = thick_font(noise_rem)
+    # erode_img = thin_font(noise_rem)
+    dilate_img = thick_font(noise_rem)
     # deskew_img = deskew(dilate_img)
-    no_border = remove_borders(erode_img)
+    no_border = remove_borders(dilate_img)
     yes_border = add_border(no_border)
 
     return yes_border

@@ -43,7 +43,7 @@ def display_images_in_folder(folder_path):
         cv2.destroyAllWindows()
 
 # Path to the folder containing images
-folder_path = r"C:\Users\amans\OneDrive\Documents\GitHub\stat_sem2_project\images\alpha1"
+folder_path = r"characters\alpha1.jpeg"
 
 # Display images in the folder one by one
 display_images_in_folder(folder_path)

@@ -88,7 +88,7 @@ class_report = classification_report(y_test, y_pred)
 print("Classification Report:\n", class_report)
 
 # Save the trained classifier to a file
-save_path = r'C:\Users\amans\OneDrive\Documents\GitHub\stat_sem2_project\submit\model.joblib'
+save_path = r'submit\model.joblib'
 joblib.dump((knn_model, label_encoder), save_path)
 print("Classifier saved to:", save_path)
 

@@ -267,7 +267,7 @@ def process_images(file_path, output_folder, character_prefix, target_width, tar
 
 # Example usage
 input_file_path = "TOOLS\\path.csv"  # Path to the input file containing image paths
-output_folder_path = "C:\\Users\\amans\\OneDrive\\Documents\\GitHub\\stat_sem2_project\\images"  # Path to the folder where output images will be saved
+output_folder_path = "TOOLS\\images"  # Path to the folder where output images will be saved
 character_prefix = "p"  # Prefix to be added to each segmented character filename
 target_width = 30
 target_height = 30
