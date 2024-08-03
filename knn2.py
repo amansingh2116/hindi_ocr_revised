@@ -101,7 +101,7 @@ print("Classifier saved to:", save_path)
 #     print("Error loading classifier:", e)
 
 # Now classify a single input image
-# image_path = r"C:\Users\amans\OneDrive\Documents\GitHub\stat_sem2_project\sample images\7\im__21.png"
+# image_path = r"\sample images\7\im__21.png"
 # img = cv2.imread(image_path)
 # hog_features = extract_hog_features(img)
 # predicted_label = loaded_clf.predict([hog_features])

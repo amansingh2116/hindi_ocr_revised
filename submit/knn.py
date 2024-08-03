@@ -57,7 +57,7 @@ def load_dataset(train_dir):
     return features, labels
 
 # Path to the directory containing the image folders
-train_dir = r"C:\Users\amans\OneDrive\Documents\GitHub\stat_sem2_project\sample images"
+train_dir = r"sample images copy"
 
 # Load dataset
 X, y = load_dataset(train_dir)

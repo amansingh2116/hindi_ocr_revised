@@ -45,7 +45,7 @@ class CustomKNNClassifier:
 
 
 # Load the trained classifier from the joblib file
-save_path = r'C:\Users\amans\OneDrive\Documents\GitHub\stat_sem2_project\submit\model.joblib'
+save_path = r'submit\model.joblib'
 # Load the trained classifier from the file
 try:
     loaded_clf, loaded_label_encoder = joblib.load(save_path)

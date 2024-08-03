@@ -1,3 +1,4 @@
+# NOTE: this code will create augmented images of the dataset in the same folder whose path give to take dataset from.
 import numpy as np
 import cv2
 import os
@@ -66,5 +67,5 @@ def augment_and_save_images_in_place(folder_path):
                     cv2.imwrite(new_file_name, aug_image)
 
 # Example usage
-root_folder_path = r'C:\Users\amans\OneDrive\Documents\GitHub\stat_sem2_project\sample images copy'
+root_folder_path = r'sample images'
 augment_and_save_images_in_place(root_folder_path)
